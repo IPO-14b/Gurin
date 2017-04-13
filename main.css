@@ -1,5 +1,18 @@
 #header {
-    -background-color: #000;
-    -height: 30px;
-    -width: 80px;
+    margin-left: 10px;
+    background-color: red;
+    height: 20px;
+    width: 300px;
+}
+#main {
+    margin-left: 10px;
+    background-color: blue;
+    height: 400px;
+    width: 300px;
+}
+#footer {
+    margin-left: 10px;
+    background-color: green;
+    height: 20px;
+    width: 300px;
 }
