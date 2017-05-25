@@ -44,7 +44,11 @@ game.newLoop('game', function () {
 	if(ball.y < 0 || ball.y + ball.h > 900)
 		dY *= -1;
 
-	speed += 0.001;
+//<<<<<<< lab4
+//	speed += 0.001;
+//=======
+	speed += 0.007;
+//>>>>>>> master
 
 	ball.move(v2d(speed * dX, speed * dY));
 
