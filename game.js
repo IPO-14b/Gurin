@@ -1,8 +1,7 @@
-var pjs = new PointJS('2D', 1280 / 2, 720 / 2, { // 16:9
-	backgroundColor : '#53769A' // if need
+var pjs = new PointJS('2D', 800, 600, {
+	backgroundColor: '#DDDDDD'
 });
-// pjs.system.initFullPage(); // for Full Page mode
-// pjs.system.initFullScreen(); // for Full Screen mode (only Desctop)
+pjs.system.initFullPage();
 
 var log    = pjs.system.log;     // log = console.log;
 var game   = pjs.game;           // Game Manager
@@ -12,75 +11,55 @@ var brush  = pjs.brush;          // Brush, used for simple drawing
 var OOP    = pjs.OOP;            // Object's manager
 var math   = pjs.math;           // More Math-methods
 var levels = pjs.levels;         // Levels manager
+var v2d    = pjs.vector.v2d;
+var random = pjs.math.random;
 
-// var key   = pjs.keyControl.initKeyControl();
-// var mouse = pjs.mouseControl.initMouseControl();
-// var touch = pjs.touchControl.initTouchControl();
-// var act   = pjs.actionControl.initActionControl();
-
+var speed = 1;
+var dX = 1, dY = random(-1, 1, true);
 var width  = game.getWH().w; // width of scene viewport
 var height = game.getWH().h; // height of scene viewport
 
 pjs.system.setTitle('PointJS Game'); // Set Title for Tab or Window
 
-// Game Loop
-game.newLoopFromConstructor('myGame', function () {
-	// Constructor Game Loop
+var mouse = pjs.mouseControl;
+mouse.initMouseControl();
+	
+var fon = game.newImageObject({
+	x : 0, y : 0,
+	file : 'background.jpg'
+});
 
-	var myText = game.newTextObject({
-		positionC : point(game.getWH2().w, game.getWH2().h), // central position of text
-		size : 50, // size text
-		color : '#EAEAEA', // color text
-		text : 'Hello, World!', // label
-		alpha : 0, // alpha channel
-		font : 'Arial' // font family
-	});
+var ball = game.newImageObject({
+	file: 'fireball.png',
+	x: random(10, 350),
+	y: random(10, 350),
+	scale: 1
+});
 
-	this.update = function () {
-		// Update function
+game.newLoop('game', function () {
+	fon.draw();
 
-		game.clear(); // clear screen
+	if(ball.x < 0 || ball.x + ball.w > 1600)
+		dX *= -1;
+	if(ball.y < 0 || ball.y + ball.h > 900)
+		dY *= -1;
 
-		myText.draw(); // drawing text
-		myText.transparent(0.005); // change alpha [0..>..1]
+	speed += 0.005;
 
-	};
+	ball.move(v2d(speed * dX, speed * dY));
 
-	// this.entry = function () { // [optional]
-	// 	// Entry Function
-	// 	log('myGame is started');
-	// };
+	ball.draw();
 
-	// this.exit = function () { // [optional]
-	// 	// Exit function
-	// 	log('myGame is stopped');
-	// };
+	var mp = mouse.getPosition();
+
+	brush.drawRoundRect({
+		x : mp.x - 12.5,
+		y : mp.y - 12.5,    
+		w : 25, h : 25,
+		radius : 10,
+		fillColor : '#515151',
+		});
 
 });
 
-// // Advanced Game Loop
-// var MyGame = function () {
-// 	// Constructor Game Loop
-
-// 	this.update = function () {
-// 		// Update function
-// 	};
-
-// 	this.entry = function () {
-// 		// Entry Function
-// 	};
-
-// 	this.exit = function () {
-// 		// Exit function
-// 	};
-
-// };
-// game.newLoopFromClassObject('myGame', new MyGame());
-
-
-// Simple Game Loop
-// game.newLoop('myGame', function () {
-// 	// Update function
-// });
-
-game.startLoop('myGame');
+game.startLoop('game');
