@@ -18,7 +18,7 @@ pjs.system.initFullPage();
  *
  * @var int $speed
  */
-var speed = 1;
+var speed = 3;
 /**
  * Координата X
  *
