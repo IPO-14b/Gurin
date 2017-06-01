@@ -14,7 +14,7 @@ var levels = pjs.levels;         // Levels manager
 var v2d    = pjs.vector.v2d;
 var random = pjs.math.random;
 
-var speed = 1;
+var speed = 2;
 var dX = 1, dY = random(-1, 1, true);
 var width  = game.getWH().w; // width of scene viewport
 var height = game.getWH().h; // height of scene viewport
