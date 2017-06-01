@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. -->
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "docbookV4.5/docbookx.dtd" []>
+<appendix>
+  <article>
+  <info>
+    <title>Sur</title>
+  </info>
+  <para>(браузерная игра)</para>
+  <para>Использован pointJS</para>
+  <section>
+    <title>Пример 1: Следование квадарата за мышкой</title>
+    <para>Инициализируем переменную окружения. </para>
+    <para>Получаем доступ к контролю мышки.</para>
+    <para>Получаем координаты мышки в данный момент.</para>
+    <para>Отрисовываем квадратик.</para>
+    <para>Устанавливаем парметры для квадратика.</para>
+    <programlisting> 
+var pjs = new PointJS('2D', 800, 600, { backgroundColor: '#DDDDDD' });
+pjs.mouseControl.initMouseControl();
+var mp = pjs.mouseControl.getPosition();
+pjs.brush.drawRoundRect({
+x : mp.x - 12.5,
+y : mp.y - 12.5,    
+w : 25, h : 25,
+radius : 10,
+fillColor : '#515151',
+}); 
+    </programlisting>
+  </section>
+  <section>
+    <title>Пример 2: Движение файрболов</title>
+    <para>Инициализируем переменную окружения. </para>
+    <para>Задаем скорость. </para>
+    <para>Случайную координату появления.</para>
+    <para>Случайное направление.</para>
+    <para>Создаем сам файрбол.</para>
+    <para>Отрисовываем сам файрбол.</para>
+    <programlisting> 
+var pjs = new PointJS('2D', 800, 600, { backgroundColor: '#DDDDDD' });
+pjs.mouseControl.initMouseControl();
+var speed = 3;
+var dX = 1; 
+var dY = pjs.math.random(-1, 1, true);
+var ball = pjs.game.newImageObject({
+    file: 'fireball.png',
+    x: pjs.math.random(10, 350),
+    y: pjs.math.random(10, 350),
+    scale: 1
+});
+ball.draw();
+    </programlisting>
+  </section>
+  <section>
+    <title>Пример 3: Жизненый цикл</title>
+    <para>Инициализируем переменную окружения. </para>
+    <para>Создаем функцию. </para>
+    <para>Привязываем функцию к пременой жизненого цикла.</para>
+    <para>Запускаем игру.</para>
+    <programlisting> 
+var pjs = new PointJS('2D', 800, 600, { backgroundColor: '#DDDDDD' });
+game.newLoop('game', function () {
+});
+game.startLoop('game');
+    </programlisting>
+  </section>
+</article>
+</appendix>
